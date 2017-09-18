@@ -879,4 +879,44 @@ public class DateUtil {
     public static boolean between(Date startTime,Date endTime,Date date){
         return date.after(startTime) && date.before(endTime);
     }
+    
+    /**
+     * 格式化日期字符串（Date）
+     * @param date 日期字符串
+     * @return 格式化后的日期（date）
+     */
+    public static Date formatToDate(String date){
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    	SimpleDateFormat formatOne = new SimpleDateFormat("yyyy-MM-dd");
+    	try {
+			if (date.indexOf("-") != -1){
+				return formatOne.parse(date);
+			} else if (date.indexOf("/") != -1){
+				return format.parse(date);
+			}
+		} catch (ParseException e) {
+			return null;
+		}
+    	return null;
+    }
+    
+    /**
+     * 格式化日期字符串（String）
+     * @param date 依然是日期字符串
+     * @return 格式化后的日期（String）
+     */
+    public static String formatToString(String date){
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    	SimpleDateFormat formatOne = new SimpleDateFormat("yyyy-MM-dd");
+    	try {
+			if (date.indexOf("-") != -1){
+				return format.format(formatOne.parse(date));
+			} else if (date.indexOf("/") != -1){
+				return format.format(format.parse(date));
+			}
+		} catch (ParseException e) {
+			return null;
+		}
+    	return null;
+    }
 }
